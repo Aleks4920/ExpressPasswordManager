@@ -55,6 +55,8 @@ router.get('/new', function (req, res) {
     if (!req.user) {
         res.redirect('/');
     }
+    //process.env.ENCRYPTION_KEY = String(req.user.password).substring(0, 31);
+
 
     res.render('newPassword', { user : req.user });
 });
@@ -80,12 +82,22 @@ const passwordSchema = new mongoose.Schema({
   
 const Password = mongoose.model('Password', passwordSchema);
 
-router.post('/new', function (req, res) {    
+router.post('/new', function (req, res) {   
+     
+
+    // if not logged in, redirect to /
+    if (!req.user) {
+        res.redirect('/');
+    }
+
+    //process.env.ENCRYPTION_KEY = String(req.user.password).substring(0, 31);
+
+
     const collection = req.user.username + "_passwords";
     const UserPassword = mongoose.model(collection, passwordSchema);
 
     // check if passwords match
-    if (req.body.password !== req.body.password2) {
+    if (req.body.password !== req.body.confirmPassword) {
         res.status(500).send("Passwords do not match");
         return;
     }
@@ -123,10 +135,16 @@ router.post('/new', function (req, res) {
 
 
 router.get('/home', function (req, res) {
+
+    
     // if not logged in, redirect to /
     if (!req.user) {
         res.redirect('/');
     }
+    //process.env.ENCRYPTION_KEY = String(req.user.password).substring(0, 31);
+
+    // print users password hash
+    //console.log(req.user.hash);
 
     // get all saveUsername from database
     Account.find({ savedUsername: req.user.username }, function (err, passwords) {
@@ -148,10 +166,13 @@ router.get('/home', function (req, res) {
 });
 
 router.get('/getPassword/:id', function (req, res) {
+
     // if not logged in, redirect to /
     if (!req.user) {
         res.redirect('/');
     }
+
+    ////process.env.ENCRYPTION_KEY = String(req.user.password).substring(0, 31);
 
     //decrypt password and send it back to client
     const collection = req.user.username + "_passwords";
@@ -177,6 +198,8 @@ router.get('/delete/:id', function (req, res) {
     if (!req.user) {
         res.redirect('/');
     }
+    //process.env.ENCRYPTION_KEY = String(req.user.password).substring(0, 31);
+
 
     // delete password from database
     const collection = req.user.username + "_passwords";
@@ -189,6 +212,62 @@ router.get('/delete/:id', function (req, res) {
         }
     });
 });
+
+router.get('/edit/:id', function (req, res) {
+    // if not logged in, redirect to /
+    if (!req.user) {
+        res.redirect('/');
+    }
+    //process.env.ENCRYPTION_KEY = String(req.user.password).substring(0, 31);
+
+
+    // get password from database
+    const collection = req.user.username + "_passwords";
+    const UserPassword = mongoose.model(collection, passwordSchema);
+    UserPassword.findById(req.params.id, function (err, password) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render('editPassword', { user : req.user, password: password });
+        }
+
+    });
+
+});
+
+router.post('/edit/:id', function (req, res) {
+    // if not logged in, redirect to /
+    if (!req.user) {
+        res.redirect('/');
+    }
+    //process.env.ENCRYPTION_KEY = String(req.user.password).substring(0, 31);
+
+
+    // check if passwords match
+    if (req.body.password !== req.body.confirmPassword) {
+        res.status(500).send("Passwords do not match");
+        return;
+    }
+
+    // check that no fields are empty
+    if (req.body.website === "" || req.body.password === "") {
+        res.status(500).send("Please fill out all fields");
+        return;
+    }
+
+    // update password in database
+    const collection = req.user.username + "_passwords";
+    const UserPassword = mongoose.model(collection, passwordSchema);
+
+    UserPassword.findByIdAndUpdate(req.params.id, { $set: { username: req.body.username, email: req.body.email, website: req.body.website, password: encrypt(req.body.password) }}, function (err, password) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/home');
+        }
+    });
+});
+
 
 
 

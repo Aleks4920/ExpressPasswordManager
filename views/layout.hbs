@@ -3,11 +3,13 @@
   <head>
     <title>{{title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    
     <script src="/javascripts/script.js"></script>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/">
   </head>
   <body> 
     {{!-- nav if user is not logged in --}}
@@ -37,7 +39,14 @@
     {{/if}}
 
     {{{body}}}
-
+    
 
   </body>
+
+  <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Place sticky footer content here.</span>
+      </div>
+    </footer>
+
 </html>
