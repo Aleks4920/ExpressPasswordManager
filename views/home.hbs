@@ -1,0 +1,47 @@
+
+{{#if user}}
+    {{!-- <p>You are currently logged in as {{user.username}}</p>
+    <a href="/logout">Logout</a> --}}
+
+
+    {{!-- password manager screen --}}
+
+    
+    {{!-- list passwords --}}
+    <h1>My Passwords</h1>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Website</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each passwords}}
+          <tr>
+            <td>{{website}}</td>
+            <td>{{username}}</td>
+            <td>{{email}}</td>
+            <td id={{_id}}>{{password}} 
+                {{!-- reveal password by calling the js--}}
+                <button type="button" class="btn btn-primary" onclick="revealPassword('{{_id}}')">Reveal</button>
+
+            </td>
+            <td>
+              <a href="/passwords/edit/{{_id}}">Edit</a>
+              <a href="/passwords/delete/{{_id}}">Delete</a>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+
+    </table>
+
+    <a href="/passwords/new">Add New Password</a>
+    
+
+{{/if}}

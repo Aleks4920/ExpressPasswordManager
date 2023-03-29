@@ -1,0 +1,33 @@
+{
+  "name": "assingment2",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.10.2",
+    "chai": "~1.8.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.3.3",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "debug": "^2.1.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-session": "^1.10.1",
+    "graphql": "^16.6.0",
+    "hbs": "^4.2.0",
+    "jade": "^1.9.1",
+    "jsonwebtoken": "^9.0.0",
+    "mocha": "^10.2.0",
+    "mongoose": "^6.9.0",
+    "morgan": "^1.5.1",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^1.0.0",
+    "serve-favicon": "^2.2.0",
+    "should": "~2.1.0"
+  }
+}
