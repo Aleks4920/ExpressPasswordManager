@@ -16,8 +16,10 @@ router.get('/', function (req, res) {
     // if user is logged in, redirect to /home
     if (req.user) {
         res.redirect('/passwords/home');
+    }else{
+        res.render('index', { user : req.user });
     }
-    res.render('index', { user : req.user });
+    
 });
 
 router.get('/register', function(req, res) {
