@@ -156,7 +156,7 @@ router.get('/home', function (req, res) {
             const UserPassword = mongoose.model(collection, passwordSchema);
             UserPassword.find({}, function (err, passwords) {
                 if (err) {
-                    console.log(err);
+                    //console.log(err);
                 } else {
                     res.render('home', { user : req.user, passwords: passwords });
                 }
