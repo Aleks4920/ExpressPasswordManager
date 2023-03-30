@@ -1,11 +1,35 @@
+<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="justify-content-center">
+				<div class="card">
+					<div class="card-body">
+						<h2 class="card-title text-center mb-4">Welcome to Password Manager</h2>
+						<p class="card-text text-center mb-4">Securely store and manage your passwords with ease.</p>
+						<a href="/register" class="btn btn-primary btn-block">Get Started</a>
+						<p class="mt-3 text-center"><small>Already have an account? <a href="/login">Log in</a></small></p>
+					</div>
+				</div>
+			</div>
+		</div>
 
-  
-  
-
-    {{!-- <a href="/login">Login</a>
-    <br>
-    <a href="/register">Register</a> --}}
-
-    <h1>
-      Welcome to the Password Manager
-    </h1>
+		<!-- Testimonials section -->
+		<div class="row mt-5">
+			<div class="col-md-12">
+				<h2 class="text-center mb-5">What our customers are saying</h2>
+			</div>
+      {{#each testimonies}}
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body">
+						{{!-- get testimony from database --}}
+            
+            <p class="card-text">{{testimony}}</p>
+            <p class="text-right font-weight-bold">- {{name}}</p>
+            
+					</div>
+				</div>
+			</div>
+      {{/each}}
+			
+		</div>
+	</div>

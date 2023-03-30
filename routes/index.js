@@ -5,10 +5,14 @@ var router = express.Router();
 var randomBytes = require("crypto").randomBytes;
 var createCipheriv = require("crypto").createCipheriv;
 var createDecipheriv = require("crypto").createDecipheriv;
+var mongoose = require('mongoose');
 
 
 
-
+var testimonySchema = new mongoose.Schema({
+    name: String,
+    testimony: String
+});
 
 router.get('/', function (req, res) {
     
@@ -17,7 +21,32 @@ router.get('/', function (req, res) {
     if (req.user) {
         res.redirect('/passwords/home');
     }else{
-        res.render('index', { user : req.user });
+        //res.render('index', { user : req.user });
+
+        //testimony schema
+
+        
+
+
+        //get testimonies from collection titled 'testimonies'
+        const collection = "customer_statments";
+        const testimonies = mongoose.model(collection, testimonySchema);
+
+        //get testimonies from database
+        testimonies.find({}, function(err, testimonies){
+            if(err){
+                console.log(err);
+            }else{
+                res.render('index', {testimonies: testimonies });
+            }
+        });
+        
+
+
+
+
+        
+
     }
     
 });
