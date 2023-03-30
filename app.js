@@ -63,6 +63,10 @@ try {
 }
 
 
+//set port to listen on
+app.set('port', process.env.PORT || 3000);
+
+
 
 
 // catch 404 and forward to error handler
