@@ -119,7 +119,7 @@ router.post('/new', function (req, res) {
     .then(result => {
         //console.log("Password saved");
         //console.log(decrypt(result.password));
-        res.redirect('/home');
+        res.redirect('/passwords/home');
     })
     .catch(err => {
         console.log(err);
@@ -208,7 +208,7 @@ router.get('/delete/:id', function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.redirect('/home');
+            res.redirect('/passwords/home');
         }
     });
 });
@@ -263,7 +263,7 @@ router.post('/edit/:id', function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.redirect('/home');
+            res.redirect('/passwords/home');
         }
     });
 });
