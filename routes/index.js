@@ -11,12 +11,13 @@ var createDecipheriv = require("crypto").createDecipheriv;
 
 
 router.get('/', function (req, res) {
-    res.render('index', { user : req.user });
+    
 
     // if user is logged in, redirect to /home
     if (req.user) {
         res.redirect('/passwords/home');
     }
+    res.render('index', { user : req.user });
 });
 
 router.get('/register', function(req, res) {

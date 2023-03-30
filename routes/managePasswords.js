@@ -196,7 +196,7 @@ router.get('/getPassword/:id', function (req, res) {
 router.get('/delete/:id', function (req, res) {
     // if not logged in, redirect to /
     if (!req.user) {
-        res.redirect('/');
+        res.redirect('/passwords/home');
     }
     //process.env.ENCRYPTION_KEY = String(req.user.password).substring(0, 31);
 
