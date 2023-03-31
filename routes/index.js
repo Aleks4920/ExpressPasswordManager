@@ -51,10 +51,12 @@ router.get('/', function (req, res) {
     
 });
 
+// register new account
 router.get('/register', function(req, res) {
     res.render('register', { });
 });
 
+// register new account and redirect to /home
 router.post('/register', function(req, res) {
 
     // add account to database
@@ -70,15 +72,18 @@ router.post('/register', function(req, res) {
 
 
 
+// login to account page
 router.get('/login', function(req, res) {
     res.render('login', { user : req.user });
 });
 
+
+// login to account page and redirect to /home
 router.post('/login', passport.authenticate('local'), function(req, res) {
   res.redirect('/passwords/home');
 });
 
-
+// logout of account page and redirect to /
 router.get('/logout', function(req, res) {
     req.logout(function(err){
         if (err) {
@@ -88,7 +93,7 @@ router.get('/logout', function(req, res) {
     });
 });
 
-
+// ping server, this is a test route
 router.get('/ping', function(req, res){
     res.status(200).send("pong!");
 });
